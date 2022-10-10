@@ -1,0 +1,71 @@
+Description: skipping useless targets for the Debian build
+Author: Pierre Gruet <pgt@debian.org>
+Forwarded: not-needed
+Last-Update: 2021-09-01
+
+--- a/build.xml
++++ b/build.xml
+@@ -27,18 +27,4 @@
+       FOUND IN common_build.xml.
+     --> 
+ 
+-	<target name="dist" description="Creates all the distributable items for this project" >
+-		<ant antfile="${common.build.file}" target="dist" />
+-		
+-		<!-- Create the required zip distribution which contains the entire project -->
+-		<zip destfile="${dist.dir}/${ivy.artifact.id}-${project.revision}.zip">
+-			<fileset dir="${basedir}">
+-				<exclude name="bin/" />
+-				<exclude name="dist/" />
+-				<exclude name="eclipse-bin/" />
+-			</fileset>
+-			<zipfileset dir="${dist.dir}" includes="**/*.jar" />
+-		</zip>
+-	</target>
+-
+ </project>
+--- a/common_build.xml
++++ b/common_build.xml
+@@ -1043,7 +1043,7 @@
+ 	      - compile.post     : anything needed after the compile is done 
+ 	    ====================================================================-->
+   <target name="compile"
+-          depends="init, compile.pre, compile.compile, compile.src_copy, compile.res_copy, compile.lic_copy, compile.post"
++          depends="init, compile.pre, compile.compile, compile.src_copy, compile.lic_copy, compile.post"
+           description="Performs all the steps to prepare the bin directory with a complete compilation" />
+ 
+ 
+@@ -1082,7 +1082,7 @@
+ 	    duplicate copying of resources from src tree (handled by compile.src_copy
+ 	    if jar.include.source is set.
+ 	    ====================================================================-->
+-  <target name="compile.res_copy" depends="install-antcontrib">
++  <target name="compile.res_copy">
+     <if>
+       <available file="${res.dir}" />
+       <then>
+@@ -1151,7 +1151,7 @@
+ 	    
+ 	    Creates a jar file from the bin directory
+ 	    ====================================================================-->
+-  <target name="jar" depends="compile,set-build.id,generate.manifest" description="Jars up the bin directory after a compile">
++  <target name="jar" depends="compile,generate.manifest" description="Jars up the bin directory after a compile">
+     <jar destfile="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" manifest="${dist.manifest.file}">
+       <fileset dir="${classes.dir}" />
+     </jar>
+@@ -1164,7 +1164,7 @@
+ 	    Creates a new manifest file if one is not specified, or updates
+ 	    an existing manifest file if one is specified.
+ 	    ====================================================================-->
+-  <target name="generate.manifest" depends="init,set-build.id">
++  <target name="generate.manifest" depends="init">
+     <delete file="${dist.manifest.file}" />
+     <touch file="${dist.manifest.file}" />
+     <copy file="${manifest.file}" tofile="${dist.manifest.file}" overwrite="true" failonerror="false" />
+@@ -1648,4 +1648,4 @@
+     </dot-classpath>
+   </target>
+ 
+-</project>
+\ No newline at end of file
++</project>

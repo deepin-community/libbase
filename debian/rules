@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+
+export CLASSPATH=/usr/share/java/commons-logging.jar
+
+%:
+	dh $@ --with javahelper
+
+override_dh_clean:
+	dh_clean
+	-rm -rf tempJar
+
+override_dh_auto_build:
+	dh_auto_build
+	# Manually copying the contents of some non-class files into the jar
+	mkdir tempJar/ && cd tempJar && \
+	        jar xf ../dist/libbase-*.jar && \
+	        cp -r ../source/org/pentaho/reporting/libraries/base/libbase.properties org/pentaho/reporting/libraries/base && \
+	        jar cf $$(basename ../dist/libbase-*.jar) * && \
+	        cp libbase-*.jar ../dist/
+
+override_dh_link:
+	dh_link
+	# Creating a libbase.jar symlink to the installed jar.
+	nameJar=$$(find debian/libbase-java/usr/share/java/ -name "*.jar") && \
+	        echo $$nameJar && \
+	        ln -s $$(basename $$nameJar) debian/libbase-java/usr/share/java/libbase.jar

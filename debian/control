@@ -1,0 +1,25 @@
+Source: libbase
+Section: java
+Priority: optional
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders: Rene Engelhard <rene@debian.org>
+Build-Depends: debhelper-compat (= 13),
+               default-jdk,
+               ant,
+               libcommons-logging-java,
+               javahelper,
+               ant-optional,
+               junit <!nocheck>
+Standards-Version: 4.6.0
+Rules-Requires-Root: no
+Homepage: http://jfreereport.sourceforge.net/
+
+Package: libbase-java
+Architecture: all
+Depends: ${java:Depends},
+         ${misc:Depends}
+Description: general purpose base service library (OOo 3.1 branch)
+ LibBase is a library developed to provide base services like
+ logging, configuration and initialization to all other libraries
+ and applications. The library is the root library for all other
+ Pentaho-Reporting projects.

@@ -1,0 +1,42 @@
+---------------
+1.  WHAT's NEW
+---------------
+A list of changes in recent versions:
+
+1.0.0: (30-May-2008)
+
+       * [BUG] Serialized configurations did not reconnect with a global
+         configuration. 
+         
+       * [BUG] Booting no longer stores references to all booted classes
+         in a global collection.
+
+       * [BUG] Fixed a deadlock when booting failed and a second boot attempt
+         was made.
+
+       * Downported I18N support from the engine.
+
+       * Imported the majority of the sources from the stale JCommon project.
+
+       * Switched logging to Apache-Commons-Logging.
+
+       * Added a ClassQueryTool that (given enough perm-gen space) travereses
+         through all classes on the classpath and can return the names of all
+         classes matching a given criteria.
+
+         It is not recommended to use this class at runtime; but it is a great
+         tool for build-time generators for configuration files.
+
+       * CSV-Reader and Writer support added.
+
+       * StringUtils now contain a equivalent for the split method, but without
+         relying on the expensive regular expressions. The StringTokenizer is
+         a lot faster.
+
+       * The module-configuration no longer relies on a home-grown fileformat
+         and uses standard properties-files for describing modules and dependencies.
+
+       * This code is a fork based on JCommon-1.0.12. JCommon is about to be
+         deprecated and development on the JCommon library will stop as 
+         JFreeChart 1.2 is released.
+ 

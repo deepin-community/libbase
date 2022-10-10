@@ -1,0 +1,63 @@
+libbase (1.1.6-3) unstable; urgency=medium
+
+  * Team upload
+  * Raising d/watch version to 4
+  * Depending on debhelper-compat 13, dropping old compat file
+    (Closes: #965626)
+  * Refreshing d/copyright
+  * Reorganizing dependencies, adding nocheck info for junit
+  * Now building with dh, dropping cdbs
+  * Raising Standards version to 4.6.0:
+    - Using 1.0 copyright format in d/copyright
+    - Setting Rules-Requires-Root: no in d/control
+  * Omitting the article at the beginning of the short description in d/control
+  * Acknowledging the source format is now 3.0 (quilt)
+  * Trim trailing whitespace.
+
+ -- Pierre Gruet <pgt@debian.org>  Thu, 02 Sep 2021 15:29:15 +0200
+
+libbase (1.1.6-2.1) unstable; urgency=medium
+
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
+
+ -- Holger Levsen <holger@debian.org>  Tue, 22 Dec 2020 00:00:15 +0100
+
+libbase (1.1.6-2) unstable; urgency=low
+
+  * merge from Ubuntu:
+    - Fix FTBFS in Ubuntu due to download of ant-contrib from sourceforge:
+      + d/control: Add ant-contrib to Build-Depends.
+      + d/ant.properties: set ant-contrib jar directory to /usr/share/java so
+        that ant build.xml thinks its already downloaded.
+      + d/rules: include ant-contrib in DEB_JARS.
+    - Use standard DEB_ANT_CHECK_TARGET to execute unit testing:
+      + d/rules: include ant-junit in DEB_JARS, uncomment DEB_ANT_CHECK_TARGET
+        and remove bespoke target to execute tests.
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 01 Nov 2011 14:42:00 +0100
+
+libbase (1.1.6-1) unstable; urgency=low
+
+  * new upstream release
+  * stop depending on JRE
+  * move to Section: java
+  * change Maintainer to Debian LibreOffice Maintainers
+  * add classpath to jar using jh_classpath
+  * use jh_depends / ${java:Depends}
+  * build-depend on junit; prepare to and run ant test
+  * build with default-jdk
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 27 Sep 2011 21:56:50 +0000
+
+libbase-openoffice.org (1.0.0-OOo31-2) unstable; urgency=low
+
+  * upload to unstable
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 06 May 2009 01:18:59 +0200
+
+libbase-openoffice.org (1.0.0-OOo31-1) experimental; urgency=low
+
+  * initial release.
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 19 Mar 2009 23:32:39 +0100
